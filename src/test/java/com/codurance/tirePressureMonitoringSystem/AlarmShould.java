@@ -44,4 +44,15 @@ public class AlarmShould {
         alarm.check();
         assertThat(alarm.isAlarmOn(), equalTo(true));
     }
+
+    @Test
+    public void set_off_when_pressure_is_within_threshold() {
+
+        Alarm alarm = new Alarm(sensor);
+
+        given(sensor.popNextPressurePsiValue()).willReturn(19d);
+
+        alarm.check();
+        assertThat(alarm.isAlarmOn(), equalTo(false));
+    }
 }
