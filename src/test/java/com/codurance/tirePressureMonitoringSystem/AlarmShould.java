@@ -1,6 +1,7 @@
 package com.codurance.tirePressureMonitoringSystem;
 
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -17,6 +18,15 @@ public class AlarmShould {
     @Mock
     private Sensor sensor;
 
+    private Alarm alarm;
+
+    @Before
+    public void setUp() throws Exception {
+        Threshold threshold = new Threshold(17, 21);
+
+        alarm = new Alarm(sensor, threshold);
+    }
+
     @Test
     public void have_alarm_set_off_by_default() {
         Alarm alarm = new Alarm();
@@ -25,9 +35,6 @@ public class AlarmShould {
 
     @Test
     public void set_on_when_pressure_is_below_threshold() {
-
-        Alarm alarm = new Alarm(sensor);
-
         given(sensor.popNextPressurePsiValue()).willReturn(16d);
 
         alarm.check();
@@ -36,9 +43,6 @@ public class AlarmShould {
 
     @Test
     public void set_on_when_pressure_is_above_threshold() {
-
-        Alarm alarm = new Alarm(sensor);
-
         given(sensor.popNextPressurePsiValue()).willReturn(22d);
 
         alarm.check();
@@ -47,9 +51,6 @@ public class AlarmShould {
 
     @Test
     public void set_off_when_pressure_is_within_threshold() {
-
-        Alarm alarm = new Alarm(sensor);
-
         given(sensor.popNextPressurePsiValue()).willReturn(19d);
 
         alarm.check();
