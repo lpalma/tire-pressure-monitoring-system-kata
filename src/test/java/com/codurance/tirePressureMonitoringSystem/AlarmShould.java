@@ -12,7 +12,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TestAlarm {
+public class AlarmShould {
 
     @Mock
     private Sensor sensor;
